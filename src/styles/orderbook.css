@@ -1,0 +1,227 @@
+button,
+fieldset,
+input {
+	all: unset;
+}
+.orderbook-container {
+	background: var(--secondary);
+	padding: 14px;
+	border-radius: 10px;
+	border: 1px solid var(--border-primary);
+}
+.TabsRoot {
+	display: flex;
+	flex-direction: column;
+}
+
+.TabsList {
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: row !important;
+	height: 50px;
+	padding-inline: 3px;
+	align-items: center;
+	background-color: var(--tab-inactive);
+	border-radius: 16px;
+	/* border-bottom: 1px solid var(--mauve-6); */
+}
+
+.TabsTrigger {
+	display: none;
+	font-family: inherit;
+	background-color: var(--tab-inactive);
+	padding: 0 20px;
+	height: 42px;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	user-select: none;
+	color: #a7b1bc;
+	outline: none;
+	border: 0;
+	/* border-radius: 1px; */
+}
+.TabsTrigger:first-child {
+	border-top-left-radius: 6px;
+}
+.TabsTrigger:last-child {
+	border-top-right-radius: 6px;
+}
+.TabsTrigger:hover {
+	/* color: var(--violet-11); */
+}
+.TabsTrigger[data-state="active"] {
+	color: white;
+	outline: none;
+	background-color: var(--tetiary);
+	border: 0;
+	border-radius: 16px;
+	/* box-shadow:
+		inset 0 -1px 0 0 currentColor,
+		0 1px 0 0 currentColor; */
+}
+/* .TabsTrigger:focus {
+	position: relative;
+	box-shadow: 0 0 0 2px black;
+} */
+
+.TabsContent {
+	flex-grow: 1;
+	padding: 20px;
+	padding-inline: 0px;
+	background-color: inherit;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	outline: none;
+	user-select: none;
+	box-shadow: 0 0 #0000;
+}
+.TabsContent:focus {
+	box-shadow: 0 0 #0000;
+}
+
+.Text {
+	margin-top: 0;
+	margin-bottom: 20px;
+	color: var(--mauve-11);
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+table {
+	width: 100%;
+	table-layout: fixed;
+}
+.table-header {
+	color: var(--secondary-tint);
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.table-header td, .orderbook-sell-data td {
+  width: 33.33%; 
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.orderbook-sell-data {
+	position: relative;
+	z-index: 1;
+	height: 40px;
+	color: white;
+}
+.orderbook-sell-data .text-error {
+	color: var(--primary-red);
+}
+.orderbook-sell-data::after {
+	content: "";
+	position: absolute;
+	width: 50%;
+	background: var(--secondary-error);
+	height: 100%;
+	z-index: -1;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+/* selct style */
+.SelectTrigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	padding: 0 15px;
+	font-size: 13px;
+	line-height: 1;
+	height: 35px;
+	gap: 5px;
+	background-color: white;
+	color: var(--violet-11);
+	box-shadow: 0 2px 10px var(--black-a7);
+}
+.SelectTrigger:hover {
+	background-color: var(--mauve-3);
+}
+.SelectTrigger:focus {
+	box-shadow: 0 0 0 2px black;
+}
+.SelectTrigger[data-placeholder] {
+	color: var(--violet-9);
+}
+
+.SelectIcon {
+	color: Var(--violet-11);
+}
+
+.SelectContent {
+	overflow: hidden;
+	background-color: white;
+	border-radius: 6px;
+	box-shadow:
+		0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+		0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+}
+
+.SelectViewport {
+	padding: 5px;
+}
+
+.SelectItem {
+	font-size: 13px;
+	line-height: 1;
+	color: var(--violet-11);
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	height: 25px;
+	padding: 0 35px 0 25px;
+	position: relative;
+	user-select: none;
+}
+.SelectItem[data-disabled] {
+	color: var(--mauve-8);
+	pointer-events: none;
+}
+.SelectItem[data-highlighted] {
+	outline: none;
+	background-color: var(--violet-9);
+	color: var(--violet-1);
+}
+
+.SelectLabel {
+	padding: 0 25px;
+	font-size: 12px;
+	line-height: 25px;
+	color: var(--mauve-11);
+}
+
+.SelectSeparator {
+	height: 1px;
+	background-color: var(--violet-6);
+	margin: 5px;
+}
+
+.SelectItemIndicator {
+	position: absolute;
+	left: 0;
+	width: 25px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.SelectScrollButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 25px;
+	background-color: white;
+	color: var(--violet-11);
+	cursor: default;
+}
