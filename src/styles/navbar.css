@@ -15,8 +15,8 @@
 }
 
 .nav-header .nav-list {
-	display: flex;   
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 .nav-header .nav-list li {
 	display: inline-block;
@@ -27,6 +27,9 @@
 	display: flex;
 	gap: 15px;
 	align-items: center;
+}
+.nav-header .nav-misc.mobile {
+	display: none;
 }
 .nav-header .nav-misc .profile-box {
 	background-color: #12171d;
@@ -45,5 +48,23 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-  margin-right: 10px;
+	margin-right: 10px;
+}
+
+@media screen and (max-width: 850px) {
+	.nav-header {
+		/* width: 100%;
+		border-bottom: 1px solid #32383f;
+		background-color: var(--primary);
+		height: 80px; */
+	}
+	.nav-header .nav-list .desktop-link {
+		display: none;
+	}
+	.nav-header .nav-misc.desktop {
+		display: none;
+	}
+	.nav-header .nav-misc.mobile {
+		display: flex;
+	}
 }

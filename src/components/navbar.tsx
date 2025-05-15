@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import World from "@/assets/icons/world";
 import LogOut from "@/assets/icons/logout";
 import { ChevronRight } from "lucide-react";
+import Hamburger from "@/assets/icons/hamburger";
 
 export default function Navbar() {
 	const location = useLocation();
@@ -31,7 +32,7 @@ export default function Navbar() {
 						/>
 					</div>
 					{pages.map((page) => (
-						<li key={page.path}>
+						<li key={page.path} className="desktop-link">
 							<Link
 								to={page.path}
 								style={{
@@ -46,7 +47,7 @@ export default function Navbar() {
 						</li>
 					))}
 				</ul>
-				<div className="nav-misc">
+				<div className="nav-misc desktop">
 					<button className="profile-box">
 						<div>
 							<img
@@ -57,13 +58,39 @@ export default function Navbar() {
 									borderRadius: "100%",
 								}}
 								src={parsedUser?.gravatarUrl}
-								alt=""
+								alt="avatar"
 							/>
 						</div>
 						<p className="user-email">{parsedUser?.email}</p>
 						<ChevronRight className="text-[#A7B1BC]" />
 					</button>
 					<World />
+					<button
+						onClick={() => {
+							localStorage.removeItem("user");
+							window.location.href = "/";
+						}}
+					>
+						<LogOut />
+					</button>
+				</div>
+				<div className="nav-misc mobile">
+					<div>
+						<img
+							width={32}
+							height={32}
+							style={{
+								marginRight: "10px",
+								borderRadius: "100%",
+							}}
+							src={parsedUser?.gravatarUrl}
+							alt="avatar"
+						/>
+					</div>
+					<World />
+					<button>
+						<Hamburger />
+					</button>
 					<button
 						onClick={() => {
 							localStorage.removeItem("user");

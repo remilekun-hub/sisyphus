@@ -21,8 +21,8 @@ export default function Orderbook() {
 	const symbol = `${slicedCurrentMarketPair[0].toLowerCase()}${slicedCurrentMarketPair[1].toLowerCase()}`;
 
 	const { bids, asks } = useBinanceOrderBook(symbol, orderLimit);
-	console.log({bids})
-	const totalBids = asks.reduce((sum, order) => sum + order.price, 0);
+	const totalBids = bids.reduce((sum, order) => sum + order.price, 0);
+	const totalAsks = asks.reduce((sum, order) => sum + order.price, 0);
 
 	const handleLimitChange = (value: string) => {
 		setOrderLimit(value);
@@ -88,8 +88,17 @@ export default function Orderbook() {
 							))}
 
 							<tr className="">
-								<td colSpan={3} style={{ textAlign: "center", paddingBlock:"6px" }}>
-									<span>{totalBids}</span> - <span>qehf</span>
+								<td
+									colSpan={3}
+									style={{
+										textAlign: "center",
+										paddingBlock: "6px",
+									}}
+								>
+									<span style={{ color: "#25c26e" }}>
+										{totalBids.toFixed(2)}
+									</span>{" "}
+									- <span>{totalAsks.toFixed(2)}</span>
 								</td>
 							</tr>
 							{bids?.map((b, i) => (

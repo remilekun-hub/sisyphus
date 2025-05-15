@@ -16,6 +16,7 @@ import type { ExchangeListType } from "@/types";
 import useDebounce from "@/hooks/usedebounce";
 import { useSearchParams } from "react-router-dom";
 import ChartHeaderData from "./chartheaderdata";
+import useTicker24hr from "@/hooks/usetickertwentyfour";
 
 export default function ChartNav() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -73,9 +74,14 @@ export default function ChartNav() {
 	};
 	const search = useDebounce(query);
 	const filteredList = (exchangesList || []).filter((value) =>
-		value.baseAsset.toLowerCase().includes(search.toLowerCase())
+		value.symbol.toLowerCase().includes(search.toLowerCase())
 	);
 	const markets = ["All", "USD", "BTC"];
+	const { data } = useTicker24hr(
+		slicedCurrentMarketPair[0],
+		slicedCurrentMarketPair[1]
+	);
+
 	return (
 		<div className="chartnav-container">
 			<div className="border-0  flex items-center gap-7">
@@ -154,10 +160,22 @@ export default function ChartNav() {
 						</div>
 					</DropdownMenuContent>
 				</DropdownMenu>
-				<p></p>
+				<p
+					style={{
+						color: "#25c26e",
+						fontSize: "18px",
+						fontWeight: 500,
+					}}
+				>
+					{data?.lastPrice
+						? `$${Number(data.lastPrice).toLocaleString()}`
+						: "-"}
+				</p>
 			</div>
 
-			<ChartHeaderData />
+			<div>
+				<ChartHeaderData />
+			</div>
 		</div>
 	);
 }
