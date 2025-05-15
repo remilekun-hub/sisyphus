@@ -15,14 +15,6 @@ function App() {
 						<Route path="/exchange" element={<Dashboardpage />} />
 						<Route path="/profile" element={<ProfilePage />} />
 					</Route>
-					{/* <Route
-							path="/profile"
-							element={
-								<ProtectedRoute>
-									<ProfilePage />
-								</ProtectedRoute>
-							}
-						/> */}
 				</Routes>
 			</Router>
 		</>

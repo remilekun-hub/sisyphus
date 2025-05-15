@@ -29,29 +29,7 @@ export default function ChartHeaderData() {
 		staleTime: 0,
 	});
 
-	console.log({ data });
-
-	askPrice: "103418.01000000";
-	askQty: "6.67117000";
-	bidPrice: "103418.00000000";
-	bidQty: "0.28547000";
-	closeTime: 1747342832009;
-	count: 3891576;
-	firstId: 4908345199;
-	highPrice: "104192.70000000";
-	lastId: 4912236774;
-	lastPrice: "103418.00000000";
-	lastQty: "0.01513000";
-	lowPrice: "101383.07000000";
-	openPrice: "103555.52000000";
-	openTime: 1747256432009;
-	prevClosePrice: "103555.52000000";
-	priceChange: "-137.52000000";
-	priceChangePercent: "-0.133";
-	quoteVolume: "1719555668.72582730";
-	symbol: "BTCUSDT";
-	volume: "16736.41940000";
-	weightedAvgPrice: "102743.34238576";
+	
 
 	function get24hrLowPercentage(
 		currentPrice: number | string | undefined,
@@ -90,7 +68,7 @@ export default function ChartHeaderData() {
 		<>
 			<div className="border-r-[1px] border-r-[#EAF0FE]/10 pr-10! py-4!">
 				<p>
-					{data.lastPrice
+					{data?.lastPrice
 						? Number(data.lastPrice).toLocaleString()
 						: "-"}
 				</p>
@@ -102,11 +80,11 @@ export default function ChartHeaderData() {
 				</h4>
 				<p>
 					<span>
-						{data.priceChange
+						{data?.priceChange
 							? Number(data.priceChange).toFixed(2)
 							: "-"}
 					</span>{" "}
-					{data.priceChangePercent
+					{data?.priceChangePercent
 						? `${Number(data.priceChangePercent).toFixed(2)}%`
 						: "-"}
 				</p>
@@ -117,7 +95,7 @@ export default function ChartHeaderData() {
 				</h4>
 				<p>
 					<span>
-						{data.highPrice
+						{data?.highPrice
 							? Number(data.highPrice).toLocaleString()
 							: "-"}
 					</span>{" "}
@@ -130,8 +108,8 @@ export default function ChartHeaderData() {
 				</h4>
 				<p>
 					<span>
-						{data.lowPrice
-							? Number(data.lowPrice).toLocaleString()
+						{data?.lowPrice
+							? Number(data.lowPrice || 0).toLocaleString()
 							: "-"}
 					</span>{" "}
 					<span>{lowPercent}%</span>
@@ -143,8 +121,8 @@ export default function ChartHeaderData() {
 					24h volume
 				</h4>
 				<p>
-					{data.quoteVolume
-						? Number(data.quoteVolume).toLocaleString()
+					{data?.quoteVolume
+						? Number(data.quoteVolume || 0).toLocaleString()
 						: "-"}
 				</p>
 			</div>

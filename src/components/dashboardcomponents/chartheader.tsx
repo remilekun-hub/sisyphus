@@ -32,9 +32,11 @@ export default function ChartNav() {
 		queryKey: ["exchanges"],
 		queryFn: async () => {
 			const { data } = await axios.get(`${base_url}/api/v3/exchangeInfo`);
-			const isSpotAllowed = (data?.symbols as ExchangeListType[]).filter(
-				(d) => d.isSpotTradingAllowed
-			);
+			const isSpotAllowed = Array.isArray(data?.symbols)
+				? (data.symbols as ExchangeListType[]).filter(
+						(d) => d.isSpotTradingAllowed
+				  )
+				: [];
 			return isSpotAllowed;
 		},
 		staleTime: 30000,
@@ -70,7 +72,7 @@ export default function ChartNav() {
 		setQuery(e.target.value.trim());
 	};
 	const search = useDebounce(query);
-	const filteredList = exchangesList.filter((value) =>
+	const filteredList = (exchangesList || []).filter((value) =>
 		value.baseAsset.toLowerCase().includes(search.toLowerCase())
 	);
 	const markets = ["All", "USD", "BTC"];
