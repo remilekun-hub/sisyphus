@@ -19,9 +19,7 @@ function AuthPage() {
 			"user",
 			JSON.stringify({ email: cleanEmail, gravatarUrl })
 		);
-		// navigate("/protected/profile");
-		// navigate(`/profile/${encodeURIComponent(email.trim().toLowerCase())}`);
-		navigate(`/profile`);
+		navigate(`/exchange`);
 	};
 
 	return (

@@ -3,12 +3,12 @@ fieldset,
 input {
 	all: unset;
 }
-.orderbook-container {
+.buy-sell-container {
 	background: var(--secondary);
 	padding: 14px;
 	border-radius: 10px;
 	border: 1px solid var(--border-primary);
-	grid-area: orderbook;
+	grid-area: buysell;
 }
 .TabsRoot {
 	display: flex;
@@ -52,6 +52,7 @@ input {
 .TabsTrigger:last-child {
 	border-top-right-radius: 6px;
 }
+
 .TabsTrigger[data-state="active"] {
 	color: white;
 	outline: none;
@@ -59,6 +60,10 @@ input {
 	border: 0;
 	border-radius: 16px;
 }
+.buy-sell-container .TabsTrigger[data-state="active"] {
+	border: 1px solid var(--secondary-success);
+}
+
 
 .TabsContent {
 	flex-grow: 1;
@@ -78,63 +83,32 @@ input {
 .Text {
 	margin-top: 0;
 	margin-bottom: 20px;
-	color: var(--mauve-11);
 	font-size: 15px;
 	line-height: 1.5;
 }
 
-table {
+.TabsContent .inner-buy .TabsList {
+	background-color: var(--secondary);
+}
+
+.TabsContent .inner-buy .TabsTrigger {
+	padding: 10px;
+	background-color: var(--secondary);
+}
+
+.TabsContent .inner-buy .TabsTrigger[data-state="active"] {
+	border: 0;
+	border-radius: 100%;
+	background-color: #353945;
+}
+
+.buy-cta {
 	width: 100%;
-	table-layout: fixed;
-}
-.table-header {
-	color: var(--secondary-tint);
-	font-size: 14px;
-	font-weight: 400;
-}
-
-.table-header td,
-.orderbook-sell-data td {
-	width: 33.33%;
-	text-align: left;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.orderbook-sell-data,
-.orderbook-buy-data {
-	position: relative;
-	z-index: 1;
-	height: 40px;
+	height: 50px;
+	border-radius: 8px;
 	color: white;
-}
-.orderbook-sell-data .text-error {
-	color: var(--primary-red);
-}
-
-.orderbook-sell-data::after {
-	content: "";
-	position: absolute;
-	width: var(--width, 0%);
-	background: var(--secondary-error);
-	height: 100%;
-	z-index: -1;
-	right: 0;
-	top: 0;
-	bottom: 0;
-}
-.orderbook-buy-data::after {
-	content: "";
-	position: absolute;
-	width: var(--width, 0%);
-	background: rgba(37, 194, 110, 0.4);
-	height: 100%;
-	z-index: -1;
-	right: 0;
-	top: 0;
-	bottom: 0;
-}
-
-.orderbook-buy-data .text-error {
-	color: var(--secondary-success);
+	font: 500;
+	border: none;
+	background: linear-gradient(90deg, #483BEB, #7847E1, #DD568D);
+  text-align: center;
 }

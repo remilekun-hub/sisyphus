@@ -12,7 +12,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<AuthPage />} />
 					<Route element={<ProtectedLayout />}>
-						<Route path="/dashboard" element={<Dashboardpage />} />
+						<Route path="/exchange" element={<Dashboardpage />} />
 						<Route path="/profile" element={<ProfilePage />} />
 					</Route>
 					{/* <Route

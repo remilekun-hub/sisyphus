@@ -1,0 +1,13 @@
+.dashboard-container {
+	height: 100%;
+	min-height: 100vh;
+	width: 100%;
+	display: grid;
+  gap: 10px;
+	grid-template-areas:
+   "chartnav chartnav chartnav chartnav chartnav"
+   "chart chart chart orderbook buysell"
+   ;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: 110px 1fr 1fr;
+}

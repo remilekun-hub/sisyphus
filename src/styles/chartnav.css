@@ -1,0 +1,25 @@
+.chartnav-container {
+	padding: 24px 16px;
+	border: 1px solid var(--border-primary);
+	border-radius: 10px;
+	background-color: var(--secondary);
+	display: flex;
+	align-items: center;
+	grid-area: chartnav;
+}
+
+.chartnav-container .item-header {
+	color: var(--secondary-tint);
+	font-weight: 400;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+  margin-bottom: 10px;
+}
+
+
+.dropdown-content {
+	background-color: var(--primary) !important;
+	border: 1px solid var(--border-primary) !important;
+}

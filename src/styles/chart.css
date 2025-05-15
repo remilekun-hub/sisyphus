@@ -1,0 +1,11 @@
+.chart-container {
+	padding: 24px 16px;
+	border: 1px solid var(--border-primary);
+	border-radius: 10px;
+	background-color: var(--secondary);
+	grid-area: chart;
+}
+.mainchart-container {
+	flex: 1;
+	margin-left: -20px !important;
+}
