@@ -5,6 +5,7 @@
 @media screen and (max-width: 1240px) {
 	.mobile-buy-sell-container {
 		display: block;
+		margin-top: 20px;
 	}
 
 	.buy-sell-wrapper {

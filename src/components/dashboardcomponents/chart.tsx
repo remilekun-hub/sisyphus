@@ -41,6 +41,20 @@ export default function Chart() {
 	const chartContainerRef = useRef<HTMLDivElement | null>(null);
 	const chart = useRef<IChartApi | null>(null);
 	const resizeObserver = useRef<ResizeObserver | null>(null);
+	const tooltipRef = useRef<HTMLDivElement | null>(null);
+	const [tooltipData, setTooltipData] = useState<{
+		visible: boolean;
+		x: number;
+		y: number;
+		candle: CandlestickData | null;
+		volume: number;
+	}>({
+		visible: false,
+		x: 0,
+		y: 0,
+		candle: null,
+		volume: 0,
+	});
 
 	// @ts-ignore
 	const parsedCandles: CandlestickData[] =
@@ -158,8 +172,48 @@ export default function Chart() {
 		});
 		chart.current.timeScale().fitContent();
 
+		chart.current.subscribeCrosshairMove((param) => {
+			if (!param.time || !chartContainerRef.current || !chart.current) {
+				setTooltipData({
+					visible: false,
+					x: 0,
+					y: 0,
+					candle: null,
+					volume: 0,
+				});
+				return;
+			}
+
+			const candle = parsedCandles.find((c) => c.time === param.time);
+			const volume =
+				parsedVolume.find((v) => v.time === param.time)?.value || 0;
+
+			if (candle && param.point) {
+				const containerRect =
+					chartContainerRef.current.getBoundingClientRect();
+				const x = param.point.x + containerRect.left;
+				const y = param.point.y + containerRect.top;
+
+				setTooltipData({
+					visible: true,
+					x,
+					y,
+					candle,
+					volume,
+				});
+			} else {
+				setTooltipData({
+					visible: false,
+					x: 0,
+					y: 0,
+					candle: null,
+					volume: 0,
+				});
+			}
+		});
+
 		return () => chart.current?.remove();
-	}, [chartData]);
+	}, [chartData, parsedCandles, parsedVolume]);
 
 	useEffect(() => {
 		if (!chartContainerRef.current || !chart.current) return;
@@ -177,6 +231,10 @@ export default function Chart() {
 
 		return () => resizeObserver.current?.disconnect();
 	}, []);
+
+	// @ts-ignore
+	const formattedTime = new Date(tooltipData.candle.time * 1000
+	).toLocaleString();
 
 	return (
 		<div className="chart-container">
@@ -197,6 +255,48 @@ export default function Chart() {
 				</div>
 			</div>
 			<div ref={chartContainerRef} className="mainchart-container" />
+			{tooltipData.visible && tooltipData.candle && (
+				<div
+					ref={tooltipRef}
+					className="tooltip"
+					style={{
+						position: "fixed",
+						left: `${tooltipData.x + 10}px`,
+						top: `${tooltipData.y + 10}px`,
+						background: "#1a1f24",
+						color: "#ffffff",
+						padding: "10px",
+						borderRadius: "4px",
+						zIndex: 1000,
+						fontSize: "12px",
+						boxShadow: "0 2px 4px rgba(0,0,0,0.5)",
+					}}
+				>
+					<div>
+						<strong>Time:</strong> // @ts-ignore
+						{formattedTime}
+					</div>
+					<div>
+						<strong>Open:</strong>{" "}
+						{tooltipData.candle.open.toFixed(2)}
+					</div>
+					<div>
+						<strong>High:</strong>{" "}
+						{tooltipData.candle.high.toFixed(2)}
+					</div>
+					<div>
+						<strong>Low:</strong>{" "}
+						{tooltipData.candle.low.toFixed(2)}
+					</div>
+					<div>
+						<strong>Close:</strong>{" "}
+						{tooltipData.candle.close.toFixed(2)}
+					</div>
+					<div>
+						<strong>Volume:</strong> {tooltipData.volume.toFixed(2)}
+					</div>
+				</div>
+			)}
 			<Mobilebuysell />
 		</div>
 	);
