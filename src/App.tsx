@@ -4,6 +4,7 @@ import AuthPage from "./pages/authpage";
 import ProfilePage from "./pages/profilepage";
 import ProtectedLayout from "./layout/protectedlayout";
 import Dashboardpage from "./pages/dashboardpage";
+import Notfoundpage from "./pages/notfoundpage";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 					<Route element={<ProtectedLayout />}>
 						<Route path="/exchange" element={<Dashboardpage />} />
 						<Route path="/profile" element={<ProfilePage />} />
+						<Route path="*" element={<Notfoundpage />} />
 					</Route>
 				</Routes>
 			</Router>
