@@ -68,7 +68,7 @@ export default function ChartHeaderData() {
 			</div>
 			<div className="chart-header-block">
 				<h4 className="item-header">
-					<MoveUp className="size-4 text-[#A7B1BC]" /> 24h high
+					<MoveUp className="size-4 text-[#5f91c6]" /> 24h high
 				</h4>
 				<p>
 					<span>

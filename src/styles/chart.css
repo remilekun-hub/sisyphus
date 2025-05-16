@@ -7,5 +7,62 @@
 }
 .mainchart-container {
 	flex: 1;
-	margin-left: -20px !important;
+
+}
+
+.time-wrapper {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	overflow: auto;
+	white-space: nowrap;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.time-label {
+	font-size: 15px;
+	background: none;
+	color: var(--secondary-tint);
+	transition: all 0.3s ease;
+	font-weight: 500;
+	outline: none;
+	border: none;
+}
+
+
+
+.time-button {
+	font-size: 15px;
+	font-weight: 500;
+	cursor: pointer;
+	outline: none;
+	border: none;
+	transition: all 0.3s ease;
+	border-radius: 9999px;
+	padding: 0.375rem 0.875rem;
+}
+.time-button:focus {
+	outline: none;
+}
+
+.time-button.active {
+	background-color: #353945;
+	color: white;
+}
+
+.time-button.inactive {
+	background: none;
+	color: var(--secondary-tint);
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+		padding: 24px 16px;
+    overflow-x: hidden;
+  }
+
+
+  .mainchart-container {
+    min-height: 250px;
+  }
 }

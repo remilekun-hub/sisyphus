@@ -1,0 +1,117 @@
+.large-orderbook-container {
+	padding: 24px 16px;
+	border: 1px solid var(--border-primary);
+	border-radius: 10px;
+	background-color: var(--secondary);
+	grid-area: largeorderbook;
+}
+
+.TabsRoot {
+	display: flex;
+	flex-direction: column;
+}
+
+.large-orderbook-container .TabsList {
+	display: inline-flex;
+	height: 50px;
+	padding-inline: 3px;
+	align-items: center;
+	width: 100%;
+	max-width: 800px;
+	overflow: auto;
+	white-space: nowrap;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+  border-radius: 6px;
+}
+
+.large-orderbook-container .TabsTrigger {
+	font-family: inherit;
+	background-color: var(--tab-inactive);
+	padding: 0 20px;
+	height: 42px;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	user-select: none;
+	color: #a7b1bc;
+	outline: none;
+	border: 0;
+}
+.TabsTrigger:first-child {
+	border-top-left-radius: 6px;
+}
+.TabsTrigger:last-child {
+	border-top-right-radius: 6px;
+}
+.large-orderbook-container .TabsTrigger[data-state="active"] {
+	color: white;
+	outline: none;
+	background-color: var(--tetiary);
+	border: 0;
+	border-radius: 6px;
+}
+
+.TabsContent {
+	flex-grow: 1;
+	padding: 20px;
+	padding-inline: 0px;
+	background-color: inherit;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	outline: none;
+	user-select: none;
+	box-shadow: 0 0 #0000;
+}
+.TabsContent:focus {
+	box-shadow: 0 0 #0000;
+}
+
+.Text {
+	margin-top: 0;
+	margin-bottom: 20px;
+	color: var(--mauve-11);
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.large-orderbook-container .TabsList::-webkit-scrollbar {
+	display: none; /* Chrome, Safari */
+}
+
+.large-orderbook-container::-webkit-scrollbar {
+	height: 6px;
+	display: none;
+}
+.large-orderbook-container::-webkit-scrollbar-thumb {
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 10px;
+	display: none;
+}
+
+.no-orders-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	padding-top: 10rem; /* py-40 = 160px */
+	padding-bottom: 10rem;
+}
+
+.no-orders-content {
+	text-align: center;
+}
+
+.no-orders-title {
+	font-size: 22px;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+
+.no-orders-subtext {
+	color: #a7b1bc;
+	font-size: 15px;
+	font-weight: 500;
+}

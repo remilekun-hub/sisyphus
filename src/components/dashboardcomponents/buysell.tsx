@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import "../../styles/buysell.css";
 import { Tabs } from "radix-ui";
 import { useState } from "react";
@@ -56,16 +55,6 @@ export default function BuySell() {
 		updateForm({ amount, total });
 	};
 
-	const handleTotalChange = (value: string) => {
-		const total = value;
-		const { price } = form;
-		const amount =
-			price && parseFloat(price) !== 0
-				? (parseFloat(total) / parseFloat(price)).toFixed(6)
-				: "";
-		updateForm({ total, amount });
-	};
-
 	return (
 		<div className="buy-sell-container">
 			<Tabs.Root className="TabsRoot" defaultValue="buy">
@@ -83,39 +72,34 @@ export default function BuySell() {
 
 				<Tabs.Content className="TabsContent" value="buy">
 					<div>
-						<div className="flex gap-3 items-center justify-between">
+						<div className="buy-type-wrapper">
 							{buyType.map((type) => (
 								<button
 									key={type}
-									className={clsx(
-										"text-[15px]! transition font-[500]! outline-0! border-0! cursor-pointer! rounded-full! px-3.5! py-1.5!",
-										{
-											"bg-[#353945]! text-white!":
-												selectedBuyType === type,
-										},
-										{
-											"bg-none! text-[#A7B1BC]!":
-												selectedBuyType !== type,
-										}
-									)}
+									className={`buy-type-button ${
+										selectedBuyType === type
+											? "buy-type-selected"
+											: "buy-type-unselected"
+									}`}
 									onClick={() => setSelectedBuyType(type)}
 								>
 									{type}
 								</button>
 							))}
 						</div>
+
 						{selectedBuyType.toLowerCase() === "limit" && (
-							<div className="w-full flex-col gap-4 mt-4! rounded-[8px!]">
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+							<div className="limit-order-wrapper">
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Limit Price{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
 											placeholder="0.00"
-											className="border-0! placeholder:text-[#A7B1BC]! text-right! flex-1! pr-2! text-[#A7B1BC]! font-[500]! text-[14px]!"
+											className="limit-input"
 											value={form.price}
 											onChange={(e) =>
 												handlePriceChange(
@@ -123,21 +107,22 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[1].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Amount{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
-											className="border-0! text-right! flex-1! pr-2! placeholder:text-[#A7B1BC]! text-[#A7B1BC]! font-[500]! text-[14px]!"
 											placeholder="0.00"
+											className="limit-input"
 											value={form.amount}
 											onChange={(e) =>
 												handleAmountChange(
@@ -145,38 +130,38 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[0].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Type{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
 									<div>
 										<Select>
-											<SelectTrigger className="text-[#A7B1BC]! font-[500]! text-[14px]! focus-visible:ring-0! ring-0! outline-none! border-0! w-auto! h-full! px-1.5!  bg-inherit! rounded-[4px]! flex! items-center! justify-center!">
+											<SelectTrigger className="limit-select-trigger">
 												<SelectValue placeholder="Good till cancelled" />
 											</SelectTrigger>
-											<SelectContent className="bg-[#353945] px-0! border-1 rounded-[12px]! border-[#373B3F]! py-0! ml-10! w-[200px]!">
+											<SelectContent className="limit-select-content">
 												<SelectItem
-													value="	Fill or Kill"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													value="Fill or Kill"
+													className="limit-select-item"
 												>
 													Fill or Kill
 												</SelectItem>
 												<SelectItem
 													value="Good till cancelled"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till cancelled
 												</SelectItem>
-
 												<SelectItem
 													value="Good till date"
-													className="rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till date
 												</SelectItem>
@@ -186,41 +171,41 @@ export default function BuySell() {
 								</div>
 							</div>
 						)}
+
 						{selectedBuyType.toLowerCase() === "market" && (
-							<div className="mt-4! mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Amount{" "}
-									<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+							<div className="limit-input-row mt-4!">
+								<p className="limit-label">
+									Amount <Info className="limit-info-icon" />
 								</p>
-								<div className="flex! items-center!">
+								<div className="limit-input-group">
 									<input
 										type="text"
-										className="border-0! text-right! flex-1! pr-2! placeholder:text-[#A7B1BC]! text-[#A7B1BC]! font-[500]! text-[14px]!"
 										placeholder="0.00"
+										className="limit-input"
 										value={form.amount}
 										onChange={(e) =>
 											handleAmountChange(e.target.value)
 										}
 									/>
-									<p className="text-[#A7B1BC] font-[500] text-[14px]">
-										{slicedCurrentMarketPair[1].toUpperCase()}
+									<p className="limit-currency">
+										{slicedCurrentMarketPair[0].toUpperCase()}
 									</p>
 								</div>
 							</div>
 						)}
 
 						{selectedBuyType.toLowerCase() === "stop-limit" && (
-							<div className="w-full flex-col gap-4 mt-4! rounded-[8px!]">
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+							<div className="limit-order-wrapper">
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Limit Price{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
 											placeholder="0.00"
-											className="border-0! placeholder:text-[#A7B1BC]! text-right! flex-1! pr-2! text-[#A7B1BC]! font-[500]! text-[14px]!"
+											className="limit-input"
 											value={form.price}
 											onChange={(e) =>
 												handlePriceChange(
@@ -228,21 +213,22 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[1].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Amount{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
-											className="border-0! text-right! flex-1! pr-2! placeholder:text-[#A7B1BC]! text-[#A7B1BC]! font-[500]! text-[14px]!"
 											placeholder="0.00"
+											className="limit-input"
 											value={form.amount}
 											onChange={(e) =>
 												handleAmountChange(
@@ -250,38 +236,38 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[0].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Type{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
 									<div>
 										<Select>
-											<SelectTrigger className="text-[#A7B1BC]! font-[500]! text-[14px]! focus-visible:ring-0! ring-0! outline-none! border-0! w-auto! h-full! px-1.5!  bg-inherit! rounded-[4px]! flex! items-center! justify-center!">
+											<SelectTrigger className="limit-select-trigger">
 												<SelectValue placeholder="Good till cancelled" />
 											</SelectTrigger>
-											<SelectContent className="bg-[#353945] px-0! border-1 rounded-[12px]! border-[#373B3F]! py-0! ml-10! w-[200px]!">
+											<SelectContent className="limit-select-content">
 												<SelectItem
-													value="	Fill or Kill"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													value="Fill or Kill"
+													className="limit-select-item"
 												>
 													Fill or Kill
 												</SelectItem>
 												<SelectItem
 													value="Good till cancelled"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till cancelled
 												</SelectItem>
-
 												<SelectItem
 													value="Good till date"
-													className="rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till date
 												</SelectItem>
@@ -293,13 +279,9 @@ export default function BuySell() {
 						)}
 
 						<div>
-							<div className="flex justify-between items-center mb-3!">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Total
-								</p>
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									{form.total}
-								</p>
+							<div className="total-row">
+								<p className="label">Total</p>
+								<p className="label">{form.total}</p>
 							</div>
 							<button
 								className="buy-cta"
@@ -309,11 +291,9 @@ export default function BuySell() {
 							</button>
 						</div>
 						<div>
-							<div className="flex justify-between items-center! mt-5!">
-								<div className="flex flex-col gap-2">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-										Total account value
-									</p>
+							<div className="account-row">
+								<div className="account-label">
+									<p className="label">Total account value</p>
 								</div>
 
 								<div>
@@ -321,91 +301,86 @@ export default function BuySell() {
 										value={selectedCurrency}
 										onValueChange={handleCurrencyChange}
 									>
-										<SelectTrigger className="text-[#A7B1BC]! py-0! font-[500]! text-[14px]! focus-visible:ring-0! ring-0! outline-none! border-0! w-auto! h-full! px-1.5!  bg-inherit! rounded-[4px]! flex! items-center! justify-center!">
+										<SelectTrigger className="select-trigger">
 											<p>{selectedCurrency}</p>
 										</SelectTrigger>
-										<SelectContent className="bg-[#353945] px-0! border-1 rounded-[24px]! border-[#373B3F]! py-0! ml-10! w-[220px]!">
+										<SelectContent className="select-content">
 											<SelectItem
 												value="NGN"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/nigerian-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="nigerian flag"
 													/>
 												</div>
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
+													<h1 className="currency-name">
 														Nigerian Naira
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														NGN
 													</p>
 												</div>
 											</SelectItem>
-
 											<SelectItem
 												value="GBP"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/british-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="british flag"
 													/>
 												</div>
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
+													<h1 className="currency-name">
 														British Pounds
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														GBP
 													</p>
 												</div>
 											</SelectItem>
-
 											<SelectItem
 												value="USD"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/american-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="american flag"
 													/>
 												</div>
-
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
+													<h1 className="currency-name">
 														US Dollars
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														USD
 													</p>
 												</div>
 											</SelectItem>
-
 											<SelectItem
 												value="EUR"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/european-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="european flag"
 													/>
 												</div>
-
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
-														European euros
+													<h1 className="currency-name">
+														European Euros
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														EUR
 													</p>
 												</div>
@@ -414,70 +389,54 @@ export default function BuySell() {
 									</Select>
 								</div>
 							</div>
-							<p className="text-white font-[700] text-[15px] inline-flex items-center">
-								0.00
-							</p>
-						</div>
 
-						<div className="flex items-center! mt-5!">
-							<div className="flex flex-col w-[65%]">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Open Orders
-								</p>
-								<p className="text-white font-[700] text-[15px] inline-flex items-center">
-									0.00
-								</p>
-							</div>
-							<div className="flex flex-col w-[35%]">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Available
-								</p>
-								<p className="text-white font-[700] text-[15px] inline-flex items-center">
-									0.00
-								</p>
-							</div>
+							<p className="balance">0.00</p>
 						</div>
 					</div>
 
-					<button className="rounded-[8px]! mt-6! px-5! py-4! bg-[#2764FF]! font-[400] text-white!">
-						Deposit
-					</button>
+					<div className="orders-row">
+						<div className="order-col">
+							<p className="label">Open Orders</p>
+							<p className="balance">0.00</p>
+						</div>
+						<div className="order-col">
+							<p className="label">Available</p>
+							<p className="balance">0.00</p>
+						</div>
+					</div>
+
+					<button className="deposit-btn">Deposit</button>
 				</Tabs.Content>
 				<Tabs.Content className="TabsContent" value="sell">
 					<div>
-						<div className="flex gap-3 items-center justify-between">
+						<div className="buy-type-wrapper">
 							{buyType.map((type) => (
 								<button
 									key={type}
-									className={clsx(
-										"text-[15px]! transition font-[500]! outline-0! border-0! cursor-pointer! rounded-full! px-3.5! py-1.5!",
-										{
-											"bg-[#353945]! text-white!":
-												selectedBuyType === type,
-										},
-										{
-											"bg-none! text-[#A7B1BC]!":
-												selectedBuyType !== type,
-										}
-									)}
+									className={`buy-type-button ${
+										selectedBuyType === type
+											? "buy-type-selected"
+											: "buy-type-unselected"
+									}`}
 									onClick={() => setSelectedBuyType(type)}
 								>
 									{type}
 								</button>
 							))}
 						</div>
+
 						{selectedBuyType.toLowerCase() === "limit" && (
-							<div className="w-full flex-col gap-4 mt-4! rounded-[8px!]">
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+							<div className="limit-order-wrapper">
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Limit Price{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
 											placeholder="0.00"
-											className="border-0! placeholder:text-[#A7B1BC]! text-right! flex-1! pr-2! text-[#A7B1BC]! font-[500]! text-[14px]!"
+											className="limit-input"
 											value={form.price}
 											onChange={(e) =>
 												handlePriceChange(
@@ -485,21 +444,22 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[1].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Amount{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
-											className="border-0! text-right! flex-1! pr-2! placeholder:text-[#A7B1BC]! text-[#A7B1BC]! font-[500]! text-[14px]!"
 											placeholder="0.00"
+											className="limit-input"
 											value={form.amount}
 											onChange={(e) =>
 												handleAmountChange(
@@ -507,38 +467,38 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[0].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Type{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
 									<div>
 										<Select>
-											<SelectTrigger className="text-[#A7B1BC]! font-[500]! text-[14px]! focus-visible:ring-0! ring-0! outline-none! border-0! w-auto! h-full! px-1.5!  bg-inherit! rounded-[4px]! flex! items-center! justify-center!">
+											<SelectTrigger className="limit-select-trigger">
 												<SelectValue placeholder="Good till cancelled" />
 											</SelectTrigger>
-											<SelectContent className="bg-[#353945] px-0! border-1 rounded-[12px]! border-[#373B3F]! py-0! ml-10! w-[200px]!">
+											<SelectContent className="limit-select-content">
 												<SelectItem
-													value="	Fill or Kill"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													value="Fill or Kill"
+													className="limit-select-item"
 												>
 													Fill or Kill
 												</SelectItem>
 												<SelectItem
 													value="Good till cancelled"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till cancelled
 												</SelectItem>
-
 												<SelectItem
 													value="Good till date"
-													className="rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till date
 												</SelectItem>
@@ -548,41 +508,41 @@ export default function BuySell() {
 								</div>
 							</div>
 						)}
+
 						{selectedBuyType.toLowerCase() === "market" && (
-							<div className="mt-4! mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Amount{" "}
-									<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+							<div className="limit-input-row mt-4!">
+								<p className="limit-label">
+									Amount <Info className="limit-info-icon" />
 								</p>
-								<div className="flex! items-center!">
+								<div className="limit-input-group">
 									<input
 										type="text"
-										className="border-0! text-right! flex-1! pr-2! placeholder:text-[#A7B1BC]! text-[#A7B1BC]! font-[500]! text-[14px]!"
 										placeholder="0.00"
+										className="limit-input"
 										value={form.amount}
 										onChange={(e) =>
 											handleAmountChange(e.target.value)
 										}
 									/>
-									<p className="text-[#A7B1BC] font-[500] text-[14px]">
-										{slicedCurrentMarketPair[1].toUpperCase()}
+									<p className="limit-currency">
+										{slicedCurrentMarketPair[0].toUpperCase()}
 									</p>
 								</div>
 							</div>
 						)}
 
 						{selectedBuyType.toLowerCase() === "stop-limit" && (
-							<div className="w-full flex-col gap-4 mt-4! rounded-[8px!]">
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+							<div className="limit-order-wrapper">
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Limit Price{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
 											placeholder="0.00"
-											className="border-0! placeholder:text-[#A7B1BC]! text-right! flex-1! pr-2! text-[#A7B1BC]! font-[500]! text-[14px]!"
+											className="limit-input"
 											value={form.price}
 											onChange={(e) =>
 												handlePriceChange(
@@ -590,21 +550,22 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[1].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Amount{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
-									<div className="flex! items-center!">
+									<div className="limit-input-group">
 										<input
 											type="text"
-											className="border-0! text-right! flex-1! pr-2! placeholder:text-[#A7B1BC]! text-[#A7B1BC]! font-[500]! text-[14px]!"
 											placeholder="0.00"
+											className="limit-input"
 											value={form.amount}
 											onChange={(e) =>
 												handleAmountChange(
@@ -612,38 +573,38 @@ export default function BuySell() {
 												)
 											}
 										/>
-										<p className="text-[#A7B1BC] font-[500] text-[14px]">
+										<p className="limit-currency">
 											{slicedCurrentMarketPair[0].toUpperCase()}
 										</p>
 									</div>
 								</div>
-								<div className="mb-4! border-[1px] rounded-[8px]! py-4! border-[#373B3F] w-full! px-4! flex! items-center! justify-between!">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
+
+								<div className="limit-input-row">
+									<p className="limit-label">
 										Type{" "}
-										<Info className="size-3 text-[#A7B1BC] ml-2! mt-1!" />
+										<Info className="limit-info-icon" />
 									</p>
 									<div>
 										<Select>
-											<SelectTrigger className="text-[#A7B1BC]! font-[500]! text-[14px]! focus-visible:ring-0! ring-0! outline-none! border-0! w-auto! h-full! px-1.5!  bg-inherit! rounded-[4px]! flex! items-center! justify-center!">
+											<SelectTrigger className="limit-select-trigger">
 												<SelectValue placeholder="Good till cancelled" />
 											</SelectTrigger>
-											<SelectContent className="bg-[#353945] px-0! border-1 rounded-[12px]! border-[#373B3F]! py-0! ml-10! w-[200px]!">
+											<SelectContent className="limit-select-content">
 												<SelectItem
-													value="	Fill or Kill"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													value="Fill or Kill"
+													className="limit-select-item"
 												>
 													Fill or Kill
 												</SelectItem>
 												<SelectItem
 													value="Good till cancelled"
-													className=" rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till cancelled
 												</SelectItem>
-
 												<SelectItem
 													value="Good till date"
-													className="rounded-[0px]! py-4! px-4! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+													className="limit-select-item"
 												>
 													Good till date
 												</SelectItem>
@@ -655,13 +616,9 @@ export default function BuySell() {
 						)}
 
 						<div>
-							<div className="flex justify-between items-center mb-3!">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Total
-								</p>
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									{form.total}
-								</p>
+							<div className="total-row">
+								<p className="label">Total</p>
+								<p className="label">{form.total}</p>
 							</div>
 							<button
 								className="buy-cta"
@@ -671,11 +628,9 @@ export default function BuySell() {
 							</button>
 						</div>
 						<div>
-							<div className="flex justify-between items-center! mt-5!">
-								<div className="flex flex-col gap-2">
-									<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-										Total account value
-									</p>
+							<div className="account-row">
+								<div className="account-label">
+									<p className="label">Total account value</p>
 								</div>
 
 								<div>
@@ -683,91 +638,86 @@ export default function BuySell() {
 										value={selectedCurrency}
 										onValueChange={handleCurrencyChange}
 									>
-										<SelectTrigger className="text-[#A7B1BC]! py-0! font-[500]! text-[14px]! focus-visible:ring-0! ring-0! outline-none! border-0! w-auto! h-full! px-1.5!  bg-inherit! rounded-[4px]! flex! items-center! justify-center!">
+										<SelectTrigger className="select-trigger">
 											<p>{selectedCurrency}</p>
 										</SelectTrigger>
-										<SelectContent className="bg-[#353945] px-0! border-1 rounded-[24px]! border-[#373B3F]! py-0! ml-10! w-[220px]!">
+										<SelectContent className="select-content">
 											<SelectItem
 												value="NGN"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/nigerian-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="nigerian flag"
 													/>
 												</div>
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
+													<h1 className="currency-name">
 														Nigerian Naira
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														NGN
 													</p>
 												</div>
 											</SelectItem>
-
 											<SelectItem
 												value="GBP"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/british-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="british flag"
 													/>
 												</div>
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
+													<h1 className="currency-name">
 														British Pounds
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														GBP
 													</p>
 												</div>
 											</SelectItem>
-
 											<SelectItem
 												value="USD"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/american-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="american flag"
 													/>
 												</div>
-
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
+													<h1 className="currency-name">
 														US Dollars
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														USD
 													</p>
 												</div>
 											</SelectItem>
-
 											<SelectItem
 												value="EUR"
-												className="flex! items-center! rounded-[0px]! py-4! px-2.5! bg-[#1C2127]! hover:bg-[#252A30]! text-white!"
+												className="select-item"
 											>
 												<div>
 													<img
 														src="./src/assets/european-flag.png"
-														className="w-[32px] h-[32px] max-w-full"
+														className="flag-icon"
 														alt="european flag"
 													/>
 												</div>
-
 												<div>
-													<h1 className="text-[14px]! font-[700] text-white">
-														European euros
+													<h1 className="currency-name">
+														European Euros
 													</h1>
-													<p className="text-[13px]! font-[500] text-[#A7B1BC] mt-1.5!">
+													<p className="currency-code">
 														EUR
 													</p>
 												</div>
@@ -776,34 +726,23 @@ export default function BuySell() {
 									</Select>
 								</div>
 							</div>
-							<p className="text-white font-[700] text-[15px] inline-flex items-center">
-								0.00
-							</p>
-						</div>
 
-						<div className="flex items-center! mt-5!">
-							<div className="flex flex-col w-[65%]">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Open Orders
-								</p>
-								<p className="text-white font-[700] text-[15px] inline-flex items-center">
-									0.00
-								</p>
-							</div>
-							<div className="flex flex-col w-[35%]">
-								<p className="text-[#A7B1BC] font-[500] text-[14px] inline-flex items-center">
-									Available
-								</p>
-								<p className="text-white font-[700] text-[15px] inline-flex items-center">
-									0.00
-								</p>
-							</div>
+							<p className="balance">0.00</p>
 						</div>
 					</div>
 
-					<button className="rounded-[8px]! mt-6! px-5! py-4! bg-[#2764FF]! font-[400] text-white!">
-						Deposit
-					</button>
+					<div className="orders-row">
+						<div className="order-col">
+							<p className="label">Open Orders</p>
+							<p className="balance">0.00</p>
+						</div>
+						<div className="order-col">
+							<p className="label">Available</p>
+							<p className="balance">0.00</p>
+						</div>
+					</div>
+
+					<button className="deposit-btn">Deposit</button>
 				</Tabs.Content>
 			</Tabs.Root>
 		</div>

@@ -8,25 +8,22 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
 import useBinanceOrderBook from "@/hooks/usebinanceorderbook";
 import OrderAsk from "./orderask";
 import OrderBid from "./orderbid";
+import { MoveUp } from "lucide-react";
 
 export default function Orderbook() {
 	const [searchParams] = useSearchParams();
 	const currentmarketPair = searchParams.get("market") || "BTC_USDT";
 	const slicedCurrentMarketPair = currentmarketPair.split("_");
-	const [orderLimit, setOrderLimit] = useState("5");
+
 	const symbol = `${slicedCurrentMarketPair[0].toLowerCase()}${slicedCurrentMarketPair[1].toLowerCase()}`;
 
-	const { bids, asks } = useBinanceOrderBook(symbol, orderLimit);
+	const { bids, asks } = useBinanceOrderBook(symbol, "5");
 	const totalBids = bids.reduce((sum, order) => sum + order.price, 0);
 	const totalAsks = asks.reduce((sum, order) => sum + order.price, 0);
 
-	const handleLimitChange = (value: string) => {
-		setOrderLimit(value);
-	};
 	return (
 		<div className="orderbook-container">
 			<Tabs.Root className="TabsRoot" defaultValue="orderbook">
@@ -41,12 +38,11 @@ export default function Orderbook() {
 						Recent Trades
 					</Tabs.Trigger>
 				</Tabs.List>
-				<div>
-					<div>hello</div>
-					<Select
-						value={orderLimit}
-						onValueChange={handleLimitChange}
-					>
+				<div className=" ordertype-box">
+					<div className="ordertype-icons">
+						
+					</div>
+					<Select>
 						<SelectTrigger
 							size="default"
 							className="focus-visible:ring-0! ring-0! outline-none! border-0! w-[60px]! h-[40px]! px-1.5!  bg-[#353945]! rounded-[4px]! flex! items-center! justify-center!"
@@ -79,8 +75,14 @@ export default function Orderbook() {
 					<div>
 						<table>
 							<tr className="table-header">
-								<td>Price (USDT)</td>
-								<td>Amount (BTC)</td>
+								<td>
+									Price <br />(
+									{slicedCurrentMarketPair[1].toUpperCase()})
+								</td>
+								<td>
+									Amount <br />(
+									{slicedCurrentMarketPair[0].toUpperCase()})
+								</td>
 								<td>Total</td>
 							</tr>
 							{asks?.map((b, i) => (
@@ -98,7 +100,15 @@ export default function Orderbook() {
 									<span style={{ color: "#25c26e" }}>
 										{totalBids.toFixed(2)}
 									</span>{" "}
-									- <span>{totalAsks.toFixed(2)}</span>
+									<span
+										style={{
+											display: "inline-block",
+											marginRight: "3px",
+										}}
+									>
+										<MoveUp className="text-[#25c26e] size-3" />{" "}
+									</span>
+									<span>{totalAsks.toFixed(2)}</span>
 								</td>
 							</tr>
 							{bids?.map((b, i) => (
@@ -108,7 +118,50 @@ export default function Orderbook() {
 					</div>
 				</Tabs.Content>
 				<Tabs.Content className="TabsContent" value="recenttrades">
-					<h1>recent</h1>
+					<div>
+						<table>
+							<tr className="table-header">
+								<td>
+									Price <br />(
+									{slicedCurrentMarketPair[1].toUpperCase()})
+								</td>
+								<td>
+									Amount <br />(
+									{slicedCurrentMarketPair[0].toUpperCase()})
+								</td>
+								<td>Total</td>
+							</tr>
+							{asks?.map((b, i) => (
+								<OrderAsk key={i} {...b} />
+							))}
+
+							<tr className="">
+								<td
+									colSpan={3}
+									style={{
+										textAlign: "center",
+										paddingBlock: "6px",
+									}}
+								>
+									<span style={{ color: "#25c26e" }}>
+										{totalBids.toFixed(2)}
+									</span>{" "}
+									<span
+										style={{
+											display: "inline-block",
+											marginRight: "3px",
+										}}
+									>
+										<MoveUp className="text-[#25c26e] size-3" />{" "}
+									</span>
+									<span>{totalAsks.toFixed(2)}</span>
+								</td>
+							</tr>
+							{bids?.map((b, i) => (
+								<OrderBid key={i} {...b} />
+							))}
+						</table>
+					</div>
 				</Tabs.Content>
 			</Tabs.Root>
 		</div>

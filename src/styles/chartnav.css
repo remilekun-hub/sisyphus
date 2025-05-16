@@ -8,6 +8,7 @@
 	overflow: hidden;
 	align-items: center;
 	grid-area: chartnav;
+	
 }
 .chartnav-container .symbol {
 	border: 0;
@@ -69,7 +70,6 @@
 		display: flex;
 		align-items: center;
 		gap: 1.75rem;
-		
 	}
 	.chartnav-container .chartheader-data-container {
 		display: flex;
@@ -95,19 +95,17 @@
 
 	.chart-header-block-wrapper {
 		display: flex;
-		overflow-x: auto;
-		overflow-y: hidden;
-		white-space: nowrap;
 		padding: 1rem 0;
 		gap: 16px;
-		scroll-behavior: smooth;
-		-webkit-overflow-scrolling: touch;
+		overflow: auto;
+		white-space: nowrap;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 	.chart-header-block {
 		flex: 0 0 auto;
 		width: auto;
 		padding: 0 1rem;
-
 		border: 1px solid rgba(255, 255, 255, 0.05);
 		border-radius: 8px;
 	}

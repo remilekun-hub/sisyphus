@@ -3,6 +3,7 @@ import Orderbook from "../components/dashboardcomponents/orderbook";
 import BuySell from "../components/dashboardcomponents/buysell";
 import ChartNav from "@/components/dashboardcomponents/chartheader";
 import Chart from "@/components/dashboardcomponents/chart";
+import LargeOrderBook from "@/components/dashboardcomponents/largeorderbook";
 
 export default function Dashboardpage() {
 	return (
@@ -11,6 +12,7 @@ export default function Dashboardpage() {
 			<Chart />
 			<Orderbook />
 			<BuySell />
+			<LargeOrderBook />
 		</div>
 	);
 }

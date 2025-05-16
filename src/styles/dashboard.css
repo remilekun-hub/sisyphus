@@ -6,9 +6,10 @@
 	gap: 10px;
 	grid-template-areas:
 		"chartnav chartnav chartnav chartnav chartnav"
-		"chart chart chart orderbook buysell";
+		"chart chart chart orderbook buysell"
+		"largeorderbook largeorderbook largeorderbook . .";
 	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: 110px 1fr 1fr;
+	grid-template-rows: 110px 1fr 500px;
 }
 
 @media screen and (max-width: 1240px) {
@@ -20,9 +21,10 @@
 		gap: 10px;
 		grid-template-areas:
 			"chartnav chartnav chartnav chartnav chartnav"
-			"chart chart chart chart chart";
+			"chart chart chart chart chart"
+			"largeorderbook largeorderbook largeorderbook largeorderbook largeorderbook";
 		grid-template-columns: repeat(5, 1fr);
-		grid-template-rows: auto 1fr;
+		grid-template-rows: auto 1fr auto;
 	}
 	.orderbook-container,
 	.buy-sell-container {

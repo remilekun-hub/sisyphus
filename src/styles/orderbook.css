@@ -24,7 +24,24 @@ input {
 	align-items: center;
 	background-color: var(--tab-inactive);
 	border-radius: 16px;
-	/* border-bottom: 1px solid var(--mauve-6); */
+
+}
+
+.ordertype-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 6px;
+}
+.ordertype-icons {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+
+}
+.ordertype-icons .icon {
+	width: 32px;
+	height: 32px;
 }
 
 .TabsTrigger {
@@ -138,3 +155,5 @@ table {
 .orderbook-buy-data .text-error {
 	color: var(--secondary-success);
 }
+
+
