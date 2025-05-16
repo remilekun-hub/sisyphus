@@ -9,6 +9,18 @@
 	align-items: center;
 	grid-area: chartnav;
 }
+.chartnav-container .symbol {
+	border: 0;
+	display: flex;
+	align-items: center;
+	gap: 1.75rem;
+	border-right: 1px solid rgba(234, 240, 254, 0.1);
+	padding-right: 40px;
+	padding-block: 10px;
+}
+.chartnav-container .chart-header-block-wrapper {
+	display: flex;
+}
 .chartnav-container .chart-header-block {
 	border: 0;
 	border-right: 1px solid rgba(234, 240, 254, 0.1);
@@ -16,6 +28,11 @@
 	padding-left: 40px;
 }
 
+.chartnav-container .chart-header-block:first-child {
+	border-right: 1px solid rgba(234, 240, 254, 0.1);
+	padding-right: 72px;
+	padding-left: 40px;
+}
 .chartnav-container .chart-header-block:last-child {
 	border-right: 0;
 }
@@ -35,16 +52,24 @@
 	border: 1px solid var(--border-primary) !important;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1240px) {
 	.chartnav-container {
 		padding: 24px 16px;
 		border: 1px solid var(--border-primary);
 		border-radius: 10px;
 		background-color: var(--secondary);
 		display: flex;
+		gap: 10px;
 		flex-direction: column;
 		align-items: start;
 		grid-area: chartnav;
+	}
+	.chartnav-container .symbol {
+		border: 0;
+		display: flex;
+		align-items: center;
+		gap: 1.75rem;
+		
 	}
 	.chartnav-container .chartheader-data-container {
 		display: flex;
@@ -54,8 +79,9 @@
 		border-right: 1px solid rgba(234, 240, 254, 0.1);
 		padding-right: 40px;
 		padding-left: 20px;
+		width: 100%;
 	}
-	.chartnav-container .chart-header-block {
+	.chart-header-block-wrapper .chart-header-block {
 		border: 0;
 		border-right: 1px solid rgba(234, 240, 254, 0.1);
 		padding-right: 30px;
@@ -63,16 +89,27 @@
 		width: auto;
 		flex: 0 0 auto;
 	}
+	.chart-header-block-wrapper .chart-header-block:first-child {
+		padding-left: 0;
+	}
 
-	
 	.chart-header-block-wrapper {
 		display: flex;
-		overflow-x: scroll;
+		overflow-x: auto;
 		overflow-y: hidden;
 		white-space: nowrap;
 		padding: 1rem 0;
+		gap: 16px;
 		scroll-behavior: smooth;
 		-webkit-overflow-scrolling: touch;
+	}
+	.chart-header-block {
+		flex: 0 0 auto;
+		width: auto;
+		padding: 0 1rem;
+
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 8px;
 	}
 	.chart-header-block-wrapper::-webkit-scrollbar {
 		height: 6px;

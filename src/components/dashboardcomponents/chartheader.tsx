@@ -84,7 +84,7 @@ export default function ChartNav() {
 
 	return (
 		<div className="chartnav-container">
-			<div className="border-0  flex items-center gap-7">
+			<div className="symbol">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<button className="outline-none! uppercase! text-[22px]! font-[500]! text-white! flex! items-center!">
