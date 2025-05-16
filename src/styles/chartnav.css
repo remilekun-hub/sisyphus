@@ -18,6 +18,125 @@
 	padding-right: 40px;
 	padding-block: 10px;
 }
+.symbol-price {
+	color: var(--secondary-success);
+	font-size: 18px;
+	font-weight: 500;
+}
+.dropdown-trigger-button {
+	outline: none;
+	text-transform: uppercase;
+	font-size: 22px;
+	font-weight: 500;
+	color: white;
+	display: flex;
+	align-items: center;
+}
+.dropdown-trigger-button:focus-within {
+	outline: none;
+}
+
+.dropdown-trigger-button svg {
+	color: white;
+	width: 1.25rem; /* size-5 */
+	height: 1.25rem;
+	margin-left: 1.25rem; /* ml-5 */
+}
+
+.dropdown-content {
+	width: 444px;
+	height: 400px;
+	border: 1px solid #373b3f;
+	border-radius: 8px;
+	margin-top: 1.25rem; /* mt-5 */
+	margin-left: 30px;
+	padding: 1rem;
+}
+
+.dropdown-title {
+	font-size: 16px;
+	margin-bottom: 0.75rem;
+	font-weight: 500;
+	color: white;
+}
+
+.dropdown-search {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: #20252b;
+	height: 40px;
+	margin-bottom: 0.75rem;
+	border: 1px solid #373b3f;
+	border-radius: 8px;
+}
+
+.dropdown-search input {
+	width: 100%;
+	flex: 1;
+	height: 100%;
+	padding-left: 0.75rem;
+	border: none;
+	color: white;
+	background: transparent;
+}
+
+.dropdown-search input::placeholder {
+	color: #a5b1bd;
+}
+
+.market-filters {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	border-top: 1px solid var(--border-primary);
+	border-bottom: 1px solid var(--border-primary);
+	padding-top: 0.375rem;
+	padding-bottom: 0.375rem;
+	border-left: none;
+	border-right: none;
+}
+
+.market-filter-button {
+	font-size: 15px;
+	font-weight: 500;
+	outline: 0;
+	border: 0;
+	cursor: pointer;
+	border-radius: 9999px;
+	padding: 0.375rem 0.75rem;
+	background: none;
+	color: #a7b1bc;
+	transition: all 0.2s ease;
+}
+
+.market-filter-button.active {
+	background-color: #353945;
+	color: white;
+}
+
+.market-list {
+	width: 100%;
+	margin-top: 0.75rem;
+}
+
+.dropdown-item {
+	cursor: pointer;
+}
+
+.dropdown-item:hover {
+	background: inherit;
+}
+
+.dropdown-item p {
+	text-transform: uppercase;
+	color: #a7b1bc;
+	font-size: 15px;
+	font-weight: 400;
+}
+
 .chartnav-container .chart-header-block-wrapper {
 	display: flex;
 }

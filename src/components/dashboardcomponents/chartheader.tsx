@@ -11,7 +11,6 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import clsx from "clsx";
 import type { ExchangeListType } from "@/types";
 import useDebounce from "@/hooks/usedebounce";
 import { useSearchParams } from "react-router-dom";
@@ -88,51 +87,43 @@ export default function ChartNav() {
 			<div className="symbol">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<button className="outline-none! uppercase! text-[22px]! font-[500]! text-white! flex! items-center!">
+						<button className="dropdown-trigger-button">
 							<span>
 								{slicedCurrentMarketPair[0]}/
 								{slicedCurrentMarketPair[1]}
 							</span>
-							<ChevronDown className="text-white size-5 ml-5!" />
+							<ChevronDown />
 						</button>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent className="w-[444px] mt-5! h-[400px] border-[1px]! rounded-[8px]! ml-[30px]! dropdown-content p-4!">
-						<p className="text-[16px] mb-3! font-[500] text-white">
-							Select Market
-						</p>
-						<div className="px-4! flex items-center w-full bg-[#20252B] h-[40px] mb-3! border-[1px]! border-[#373B3F]!  rounded-[8px]!">
-							<Glass className="mt-0.5!" />
+
+					<DropdownMenuContent className="dropdown-content">
+						<p className="dropdown-title">Select Market</p>
+
+						<div className="dropdown-search">
+							<Glass />
 							<input
 								type="text"
 								value={query}
 								onChange={handleChange}
 								placeholder="Search"
-								className="w-full! flex-1 border-0 h-full text-white! pl-3! placeholder:text-[#A5B1BD]!"
 							/>
 						</div>
-						<div className="flex items-center gap-4 border-[1px] py-1.5! border-x-0 border-[var(--border-primary)]">
+
+						<div className="market-filters">
 							{markets.map((m) => (
 								<button
 									key={m}
 									onClick={() => setSelectMarket(m)}
-									className={clsx(
-										"text-[15px]! font-[500]! outline-0! border-0! cursor-pointer! rounded-full! px-3! py-1.5!",
-										{
-											"bg-[#353945]! text-white!":
-												selectMarket === m,
-										},
-										{
-											"bg-none! text-[#A7B1BC]!":
-												selectMarket !== m,
-										}
-									)}
+									className={`market-filter-button ${
+										selectMarket === m ? "active" : ""
+									}`}
 								>
 									{m}
 								</button>
 							))}
 						</div>
 
-						<div className="w-full mt-3!">
+						<div className="market-list">
 							<List
 								height={210}
 								itemCount={filteredList.length}
@@ -151,9 +142,9 @@ export default function ChartNav() {
 													market: `${d.baseAsset.toUpperCase()}_${d.quoteAsset.toUpperCase()}`,
 												});
 											}}
-											className="hover:bg-inherit! cursor-pointer!"
+											className="dropdown-item"
 										>
-											<p className="uppercase text-[#A7B1BC] text-[15px] font-[400]">
+											<p>
 												{d.baseAsset} - {d.quoteAsset}
 											</p>
 										</DropdownMenuItem>
@@ -163,13 +154,8 @@ export default function ChartNav() {
 						</div>
 					</DropdownMenuContent>
 				</DropdownMenu>
-				<p
-					style={{
-						color: "#25c26e",
-						fontSize: "18px",
-						fontWeight: 500,
-					}}
-				>
+
+				<p className="symbol-price">
 					{data?.lastPrice
 						? `$${Number(data.lastPrice).toLocaleString()}`
 						: "-"}
