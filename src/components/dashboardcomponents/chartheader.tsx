@@ -3,7 +3,7 @@ import "../../styles/chartnav.css";
 import { useQuery } from "@tanstack/react-query";
 import { base_url } from "@/constants";
 import axios from "axios";
-import React, { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { FixedSizeList as List } from "react-window";
 import {
 	DropdownMenu,
@@ -17,6 +17,7 @@ import useDebounce from "@/hooks/usedebounce";
 import { useSearchParams } from "react-router-dom";
 import ChartHeaderData from "./chartheaderdata";
 import useTicker24hr from "@/hooks/usetickertwentyfour";
+import Glass from "@/assets/icons/glass";
 
 export default function ChartNav() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -82,7 +83,6 @@ export default function ChartNav() {
 		slicedCurrentMarketPair[1]
 	);
 
-
 	return (
 		<div className="chartnav-container">
 			<div className="symbol">
@@ -100,13 +100,14 @@ export default function ChartNav() {
 						<p className="text-[16px] mb-3! font-[500] text-white">
 							Select Market
 						</p>
-						<div className="flex w-full bg-[#20252B] h-[40px] mb-3!">
+						<div className="px-4! flex items-center w-full bg-[#20252B] h-[40px] mb-3! border-[1px]! border-[#373B3F]!  rounded-[8px]!">
+							<Glass className="mt-0.5!" />
 							<input
 								type="text"
 								value={query}
 								onChange={handleChange}
-								placeholder="search"
-								className="w-full! flex-1 border-[1px]! border-[#373B3F]! rounded-[8px]! h-full text-white! pl-2!"
+								placeholder="Search"
+								className="w-full! flex-1 border-0 h-full text-white! pl-3! placeholder:text-[#A5B1BD]!"
 							/>
 						</div>
 						<div className="flex items-center gap-4 border-[1px] py-1.5! border-x-0 border-[var(--border-primary)]">
