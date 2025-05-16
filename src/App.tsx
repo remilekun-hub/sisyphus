@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AuthPage from "./pages/authpage";
 import ProfilePage from "./pages/profilepage";
 import ProtectedLayout from "./layout/protectedlayout";

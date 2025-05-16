@@ -42,6 +42,7 @@ export default function Chart() {
 	const chart = useRef<IChartApi | null>(null);
 	const resizeObserver = useRef<ResizeObserver | null>(null);
 
+	// @ts-ignore
 	const parsedCandles: CandlestickData[] =
 		chartData?.map((candle) => ({
 			time: candle[0] / 1000,
@@ -51,6 +52,7 @@ export default function Chart() {
 			close: parseFloat(candle[4]),
 		})) ?? [];
 
+	// @ts-ignore
 	const parsedVolume: HistogramData[] =
 		chartData?.map((candle) => ({
 			time: candle[0] / 1000,
@@ -84,6 +86,7 @@ export default function Chart() {
 				fixLeftEdge: true,
 				timeVisible: true,
 				secondsVisible: false,
+				// @ts-ignore
 				tickMarkFormatter: (time) => {
 					const date = new Date(time * 1000);
 					const hours = date.getHours().toString().padStart(2, "0");
