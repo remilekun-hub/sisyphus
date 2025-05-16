@@ -1,4 +1,4 @@
-import { ChartColumnIncreasing, Clock, MoveUp } from "lucide-react";
+import { ChartColumnIncreasing, Clock, MoveDown, MoveUp } from "lucide-react";
 import "../../styles/chartnav.css";
 import { useSearchParams } from "react-router-dom";
 import useTicker24hr from "@/hooks/usetickertwentyfour";
@@ -68,7 +68,7 @@ export default function ChartHeaderData() {
 			</div>
 			<div className="chart-header-block">
 				<h4 className="item-header">
-					<MoveUp className="size-4 text-[#5f91c6]" /> 24h high
+					<MoveUp className="size-4 text-[#A7B1BC]" /> 24h high
 				</h4>
 				<p>
 					<span>
@@ -81,7 +81,7 @@ export default function ChartHeaderData() {
 			</div>
 			<div className="chart-header-block">
 				<h4 className="item-header">
-					<MoveUp className="size-4 text-[#A7B1BC]" /> 24h low
+					<MoveDown className="size-4 text-[#A7B1BC]" /> 24h low
 				</h4>
 				<p>
 					<span>

@@ -41,6 +41,10 @@
 	color: var(--secondary-tint);
 	display: inline-flex;
 	align-items: center;
+	cursor: pointer;
+}
+.nav-header .nav-misc .profile-box:focus-within {
+	outline: none;
 }
 
 .profile-box .user-email {
@@ -49,6 +53,10 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	margin-right: 10px;
+}
+.nav-btn {
+	outline: none;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 850px) {

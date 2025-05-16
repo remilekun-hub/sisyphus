@@ -62,3 +62,8 @@ export type OrderFormState = {
   amount: string;
   total: string;
 };
+
+export type UserData = {
+	email: string;
+	gravatarUrl: string;
+}

@@ -3,7 +3,7 @@ import "../../styles/chartnav.css";
 import { useQuery } from "@tanstack/react-query";
 import { base_url } from "@/constants";
 import axios from "axios";
-import { useEffect, useState, type ChangeEvent } from "react";
+import React, { useEffect, useState, type ChangeEvent } from "react";
 import { FixedSizeList as List } from "react-window";
 import {
 	DropdownMenu,
@@ -82,6 +82,7 @@ export default function ChartNav() {
 		slicedCurrentMarketPair[1]
 	);
 
+
 	return (
 		<div className="chartnav-container">
 			<div className="symbol">
@@ -136,6 +137,7 @@ export default function ChartNav() {
 								itemCount={filteredList.length}
 								itemSize={45}
 								width={"100%"}
+								className="react-window-no-scrollbar"
 							>
 								{({ index, style }) => {
 									const d = filteredList[index];

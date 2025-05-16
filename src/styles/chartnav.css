@@ -8,7 +8,6 @@
 	overflow: hidden;
 	align-items: center;
 	grid-area: chartnav;
-	
 }
 .chartnav-container .symbol {
 	border: 0;
@@ -51,6 +50,16 @@
 .dropdown-content {
 	background-color: var(--primary) !important;
 	border: 1px solid var(--border-primary) !important;
+}
+
+.react-window-no-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	overflow-y: scroll;
+}
+
+.react-window-no-scrollbar::-webkit-scrollbar {
+	display: none;
 }
 
 @media screen and (max-width: 1240px) {

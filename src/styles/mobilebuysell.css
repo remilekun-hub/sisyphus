@@ -1,0 +1,34 @@
+.mobile-buy-sell-container {
+	display: none;
+}
+
+@media screen and (max-width: 1240px) {
+	.mobile-buy-sell-container {
+		display: block;
+	}
+
+	.buy-sell-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.mobile-buy-sell-container button {
+		width: 100%;
+		border-radius: 8px;
+		height: 40px;
+		background-color: red;
+		text-align: center;
+		font-weight: 500;
+		color: white;
+		outline: none;
+    cursor: pointer;
+	}
+
+	.mobile-buy-sell-container .buy {
+		background-color: var(--secondary-success);
+	}
+	.mobile-buy-sell-container .sell {
+		background-color: var(--primary-red);
+	}
+}

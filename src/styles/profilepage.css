@@ -1,0 +1,26 @@
+.profile-container {
+	padding: 2rem;
+  
+}
+
+.profile-image-wrapper {
+  display: flex;
+  align-items: center;
+	/* width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%; */
+} 
+.profile-image-wrapper img {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+  margin-left: 14px;
+}
+
+.profile-label {
+	font-size: 16px;
+  margin-top: 10px;
+	font-weight: 500;
+}

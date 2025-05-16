@@ -24,7 +24,6 @@ input {
 	align-items: center;
 	background-color: var(--tab-inactive);
 	border-radius: 16px;
-
 }
 
 .ordertype-box {
@@ -37,7 +36,6 @@ input {
 	display: flex;
 	gap: 4px;
 	align-items: center;
-
 }
 .ordertype-icons .icon {
 	width: 32px;
@@ -45,7 +43,6 @@ input {
 }
 
 .TabsTrigger {
-	display: none;
 	font-family: inherit;
 	background-color: var(--tab-inactive);
 	padding: 0 20px;
@@ -61,7 +58,6 @@ input {
 	color: #a7b1bc;
 	outline: none;
 	border: 0;
-	/* border-radius: 1px; */
 }
 .TabsTrigger:first-child {
 	border-top-left-radius: 6px;
@@ -69,12 +65,12 @@ input {
 .TabsTrigger:last-child {
 	border-top-right-radius: 6px;
 }
-.TabsTrigger[data-state="active"] {
+.orderbook-container .TabsTrigger[data-state="active"] {
 	color: white;
 	outline: none;
 	background-color: var(--tetiary);
 	border: 0;
-	border-radius: 16px;
+	border-radius: 10px !important;
 }
 
 .TabsContent {
@@ -155,5 +151,3 @@ table {
 .orderbook-buy-data .text-error {
 	color: var(--secondary-success);
 }
-
-

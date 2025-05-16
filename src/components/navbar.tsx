@@ -48,24 +48,27 @@ export default function Navbar() {
 					))}
 				</ul>
 				<div className="nav-misc desktop">
-					<button className="profile-box">
-						<div>
-							<img
-								width={32}
-								height={32}
-								style={{
-									marginRight: "10px",
-									borderRadius: "100%",
-								}}
-								src={parsedUser?.gravatarUrl}
-								alt="avatar"
-							/>
-						</div>
-						<p className="user-email">{parsedUser?.email}</p>
-						<ChevronRight className="text-[#A7B1BC]" />
-					</button>
+					<Link to={'/profile'}>
+						<button className="profile-box">
+							<div>
+								<img
+									width={32}
+									height={32}
+									style={{
+										marginRight: "10px",
+										borderRadius: "100%",
+									}}
+									src={parsedUser?.gravatarUrl}
+									alt="avatar"
+								/>
+							</div>
+							<p className="user-email">{parsedUser?.email}</p>
+							<ChevronRight className="text-[#A7B1BC]" />
+						</button>
+					</Link>
 					<World />
 					<button
+						className="nav-btn"
 						onClick={() => {
 							localStorage.removeItem("user");
 							window.location.href = "/";
@@ -88,10 +91,11 @@ export default function Navbar() {
 						/>
 					</div>
 					<World />
-					<button>
+					<button className="nav-btn">
 						<Hamburger />
 					</button>
 					<button
+						className="nav-btn"
 						onClick={() => {
 							localStorage.removeItem("user");
 							window.location.href = "/";
