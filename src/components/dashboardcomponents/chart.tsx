@@ -233,8 +233,9 @@ export default function Chart() {
 	}, []);
 
 	// @ts-ignore
-	const formattedTime = new Date(tooltipData.candle.time * 1000
+	const formattedTime =  tooltipData?.candle?.time &&  new Date(tooltipData.candle.time * 1000
 	).toLocaleString();
+
 
 	return (
 		<div className="chart-container">
@@ -254,6 +255,8 @@ export default function Chart() {
 					))}
 				</div>
 			</div>
+
+			
 			<div ref={chartContainerRef} className="mainchart-container" />
 			{tooltipData.visible && tooltipData.candle && (
 				<div
@@ -273,7 +276,7 @@ export default function Chart() {
 					}}
 				>
 					<div>
-						<strong>Time:</strong> // @ts-ignore
+						<strong>Time:</strong>
 						{formattedTime}
 					</div>
 					<div>

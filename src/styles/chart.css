@@ -64,6 +64,26 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.candle-info {
+	background: #1a1f24;
+	color: #ffffff;
+	padding: 15px;
+	border-radius: 4px;
+	margin-top: 10px;
+	font-size: 14px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.candle-info-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.candle-info-row span {
+	flex: 1;
+}
+
 @media (max-width: 768px) {
   .chart-container {
 		padding: 24px 16px;
