@@ -26,7 +26,7 @@ function AuthPage() {
 		<div className="auth-container">
 			<div className="auth-content">
 				<h1 className="title">Log In</h1>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} className="auth-form">
 					<input
 						type="email"
 						required

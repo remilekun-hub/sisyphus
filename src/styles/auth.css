@@ -17,9 +17,17 @@
 	text-align: center;
 	font-size: 40px;
   margin-bottom: 16px;
+	font-weight: 900;
 }
 .auth-content .email-input {
   margin-bottom: 16px;
+	border: 1px solid white;
+	padding-inline: 12px;
+	padding-block: 10px;
+	border-radius: 8px;
+}
+.auth-content .email-input:focus-within {
+	outline: none;
 }
 
 .auth-content .auth-cta {
@@ -27,10 +35,17 @@
   color: black;
   border-radius: 6px;
   outline: none;
-  font-size: 16px;
+  font-size: 14px;
+	text-align: center;
+	padding: 8px;
+	
 }
 
 .auth-content .auth-cta:hover {
  background-color: whitesmoke;
  transition: .3s color ;
+}
+.auth-form {
+	display: flex;
+	flex-direction: column;
 }
