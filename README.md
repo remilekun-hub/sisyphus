@@ -34,3 +34,13 @@ Ensure you're connected to a VPN before continuing. This step is **required** to
 
 ### 3. START the App
 npm run dev
+
+- on Login, user details and profile image(gravatar) is saved in the local storage and you're redirected moved to the exchange page
+
+- binance base url 'https://api.binance.com'
+
+-markets list are gotten from "https://api.binance.com/api/v3/exchangeInfo" but doesnt come with the image, there's another way but theres not alot of time to implement
+
+-order books data are gotten from websocket connection wss://stream.binance.com:9443/ws/${lowerSymbol}@depth${limit}@1000ms`; where {lowersymbol} is your symbol in lowercase, {limit} the order limit
+
+-couldn't do the mobile screens coz theere was no time.
