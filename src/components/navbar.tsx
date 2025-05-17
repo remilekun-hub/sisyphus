@@ -21,7 +21,7 @@ export default function Navbar() {
 				<ul className="nav-list">
 					<div style={{ marginRight: "50px", flexShrink: 0 }}>
 						<img
-							src="../../src/assets/logo.png"
+							src="/logo.png"
 							width={121}
 							height={24}
 							alt="logo"

@@ -648,7 +648,7 @@ export default function BuySell() {
 											>
 												<div>
 													<img
-														src="./src/assets/nigerian-flag.png"
+														src="/nigerian-flag.png"
 														className="flag-icon"
 														alt="nigerian flag"
 													/>
@@ -668,7 +668,7 @@ export default function BuySell() {
 											>
 												<div>
 													<img
-														src="./src/assets/british-flag.png"
+														src="/british-flag.png"
 														className="flag-icon"
 														alt="british flag"
 													/>
@@ -688,7 +688,7 @@ export default function BuySell() {
 											>
 												<div>
 													<img
-														src="./src/assets/american-flag.png"
+														src="/american-flag.png"
 														className="flag-icon"
 														alt="american flag"
 													/>
@@ -708,7 +708,7 @@ export default function BuySell() {
 											>
 												<div>
 													<img
-														src="./src/assets/european-flag.png"
+														src="/european-flag.png"
 														className="flag-icon"
 														alt="european flag"
 													/>
